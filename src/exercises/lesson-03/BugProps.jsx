@@ -1,5 +1,7 @@
 // src/exercises/lesson-03/BugProps.jsx
 
+import { useEffect, useState } from 'react';
+
 /*
   BUG #3 — Props Not Updating
 
@@ -13,10 +15,15 @@
 */
 
 export default function BugProps({ name = 'friend' }) {
-  let message = 'Hello, ' + name;
+  const [message, setMessage] = useState(`Hello, ${name}`);
+
+  // Run once on mount *and* whenever the prop `name` changes.
+  useEffect(() => {
+    setMessage(`Hello,  ${name}`);
+  }, [name]);
 
   function handleChange() {
-    message = 'Hi, ' + name + '!';
+    setMessage('Hi, ' + name + '!');
   }
 
   return (
@@ -28,4 +35,8 @@ export default function BugProps({ name = 'friend' }) {
 }
 
 // Explanation:
-// (Write your explanation here)
+// Updating the message variable works in plain JS because it was intantiated with `let`.
+// However React won't see the changes to it because it isn't tracking it for changes.
+// My proposed fix is to use a `useState` to set the initial state.
+// then use it's setter method to update the value when the function `handleChange` is called.
+// I also added a `useEffect` in case the name prop is changed upstream in the parent.
