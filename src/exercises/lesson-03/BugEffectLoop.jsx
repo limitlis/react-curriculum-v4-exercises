@@ -15,10 +15,12 @@ export default function BugEffectLoop() {
 
   useEffect(() => {
     setCount(count + 1);
-  });
+  }, []);
 
   return <p>Bug 1 Count: {count}</p>;
 }
 
 // Explanation:
-// (Write your explanation here)
+// `useEffect` generally requires setting the depepency on which it should "watch".
+// Setting it to `[]` in this case fixes it so that it only runs once on render
+// Leaving it empty can lead to an infinite loop because it runs on every single render..
