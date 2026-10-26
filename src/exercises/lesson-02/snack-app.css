@@ -1,0 +1,32 @@
+.snacks-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 7px double var(--navy-blue);
+  max-width: 50ch;
+  margin: 0 auto;
+  border-radius: 2rem;
+  /* overflow: hidden; */
+
+  header,
+  footer {
+    flex: 1;
+    width: 100%;
+    text-align: center;
+    background: color-mix(in srgb, var(--navy-blue) 30%, var(--off-white) 100%);
+    overflow: hidden;
+  }
+  header {
+    border-bottom: 1px dotted var(--navy-blue);
+  }
+  article {
+    font-size: 1.2rem;
+    line-height: 2.2;
+  }
+  footer {
+    border-top: 1px dotted var(--navy-blue);
+    padding: 1.3rem 0;
+    font-weight: 900;
+    font-size: 1.1rem;
+  }
+}
