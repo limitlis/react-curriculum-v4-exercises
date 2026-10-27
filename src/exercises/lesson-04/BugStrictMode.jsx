@@ -7,9 +7,12 @@ export default function BugStrictMode() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    setInterval(() => {
+    const counterInterval = setInterval(() => {
       setCount((c) => c + 1);
     }, 1000);
+    return () => {
+      clearInterval(counterInterval);
+    };
   }, []);
 
   return (
@@ -21,3 +24,5 @@ export default function BugStrictMode() {
 }
 
 // Write your explanation of how StrictMode helps us catch this bug
+// The useEffect call was missing it's cleanup function.
+// This was leading to two intervals getting created and causing the count to increment by 2.
